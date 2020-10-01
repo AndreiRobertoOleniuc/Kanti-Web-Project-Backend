@@ -28,6 +28,7 @@ public class QuestionController {
         questions.add(new Question(2, "Wie läuft es so mit Mathe ?"));
         questions.add(new Question(3, "Willst du deine Freizeit Opfern ?"));
         questions.add(new Question(4, "Könntest du dir vorstellen in ein Gebiet einzutauchen welches sich Konstant verändert?"));
+        questions.add(new Question(5, "Würdest du dich eher als eine Person beschrieben welche Lieber seine Arbeit ohne grosse Aktivität durchführt beschrieben"));
     }
 
     @GetMapping("/question")
@@ -56,7 +57,7 @@ public class QuestionController {
 
     @GetMapping("/calculateRate")
     @CrossOrigin(origins = "http://localhost:3000")
-    public Answer getCalculation(@RequestParam(value = "answers", defaultValue = "1111") String answer) {
+    public Answer getCalculation(@RequestParam(value = "answers", defaultValue = "0") String answer) {
         ArrayList<Integer> werte = new ArrayList<>();
         for (int i = 0; i < answer.length(); i++) {
             int a = Integer.parseInt(String.valueOf(answer.charAt(i)));
@@ -66,7 +67,7 @@ public class QuestionController {
         for (Integer i : werte) {
             sum += i;
         }
-        sum /= 16;
+        sum /= questions.size() * 4;
         sum *= 100;
         return new Answer(1, Double.toString(sum));
     }
