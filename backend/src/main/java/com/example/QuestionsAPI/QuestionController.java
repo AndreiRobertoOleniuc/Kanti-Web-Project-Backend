@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class QuestionController {
 
     private static final String template = "%s?";
-    private final AtomicLong counter = new AtomicLong();
     ArrayList<Question> questions = new ArrayList<>();
 
     public QuestionController() {
@@ -34,7 +33,7 @@ public class QuestionController {
     @GetMapping("/question")
     @CrossOrigin(origins = "http://localhost:3000")
     public Question question(@RequestParam(value = "question", defaultValue = "Wie gehts dir") String question) {
-        return new Question(counter.incrementAndGet(), String.format(template, question));
+        return new Question(1, String.format(template, question));
     }
 
     @GetMapping("/getAllQuestion")
