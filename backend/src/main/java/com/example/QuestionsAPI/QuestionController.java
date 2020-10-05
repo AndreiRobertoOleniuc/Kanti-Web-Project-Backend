@@ -23,11 +23,13 @@ public class QuestionController {
     ArrayList<Question> questions = new ArrayList<>();
 
     public QuestionController() {
-        questions.add(new Question(1, "Hast du spass mit Computer zu arbeiten ?"));
-        questions.add(new Question(2, "Wie läuft es so mit Mathe ?"));
-        questions.add(new Question(3, "Willst du deine Freizeit Opfern ?"));
-        questions.add(new Question(4, "Könntest du dir vorstellen in ein Gebiet einzutauchen welches sich Konstant verändert?"));
-        questions.add(new Question(5, "Würdest du dich eher als eine Person beschrieben welche Lieber seine Arbeit ohne grosse Aktivität durchführt beschrieben"));
+        AtomicLong counter = new AtomicLong();
+        questions.add(new Question(counter.incrementAndGet(), "Hast du spass mit Computer zu arbeiten ?"));
+        questions.add(new Question(counter.incrementAndGet(), "Wie läuft es so mit Mathe ?"));
+        questions.add(new Question(counter.incrementAndGet(), "Willst du deine Freizeit Opfern ?"));
+        questions.add(new Question(counter.incrementAndGet(), "Könntest du dir vorstellen in ein Gebiet einzutauchen welches sich Konstant verändert?"));
+        questions.add(new Question(counter.incrementAndGet(), "Würdest du dich eher als eine Person beschrieben welche Lieber seine Arbeit ohne grosse Aktivität durchführt beschrieben?"));
+        questions.add(new Question(counter.incrementAndGet(), "Dies könnte zu deinem einzigen Leben werden, willst du das wirklich?"));
     }
 
     @GetMapping("/question")
@@ -57,14 +59,10 @@ public class QuestionController {
     @GetMapping("/calculateRate")
     @CrossOrigin(origins = "http://localhost:3000")
     public Answer getCalculation(@RequestParam(value = "answers", defaultValue = "0") String answer) {
-        ArrayList<Integer> werte = new ArrayList<>();
+        double sum = 0;
         for (int i = 0; i < answer.length(); i++) {
             int a = Integer.parseInt(String.valueOf(answer.charAt(i)));
-            werte.add(a);
-        }
-        double sum = 0;
-        for (Integer i : werte) {
-            sum += i;
+            sum += a;
         }
         sum /= questions.size() * 4;
         sum *= 100;
