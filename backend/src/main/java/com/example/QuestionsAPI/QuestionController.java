@@ -32,12 +32,6 @@ public class QuestionController {
         questions.add(new Question(counter.incrementAndGet(), "Dies könnte zu deinem einzigen Leben werden, willst du das wirklich?"));
     }
 
-    @GetMapping("/question")
-    @CrossOrigin(origins = "http://localhost:3000")
-    public Question question(@RequestParam(value = "question", defaultValue = "Wie gehts dir") String question) {
-        return new Question(1, String.format(template, question));
-    }
-
     @GetMapping("/getAllQuestion")
     @CrossOrigin(origins = "http://localhost:3000")
     public ArrayList<Question> questions() {
