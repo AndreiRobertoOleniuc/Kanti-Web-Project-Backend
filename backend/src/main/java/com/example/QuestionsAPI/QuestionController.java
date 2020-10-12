@@ -7,6 +7,9 @@ package com.example.QuestionsAPI;
 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicLong;
+
+import com.example.Models.Answer;
+import com.example.Models.Question;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
