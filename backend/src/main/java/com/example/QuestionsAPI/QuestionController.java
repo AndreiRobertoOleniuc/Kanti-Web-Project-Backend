@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.example.Controllers;
+package com.example.QuestionsAPI;
 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicLong;
-
-import com.example.Models.Answer;
-import com.example.Models.Question;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
@@ -29,10 +29,18 @@ public class QuestionController {
         questions.add(new Question(counter.incrementAndGet(), "Willst du deine Freizeit Opfern ?"));
         questions.add(new Question(counter.incrementAndGet(), "Könntest du dir vorstellen in ein Gebiet einzutauchen welches sich Konstant verändert?"));
         questions.add(new Question(counter.incrementAndGet(), "Würdest du dich eher als eine Person beschrieben welche Lieber seine Arbeit ohne grosse Aktivität durchführt beschrieben?"));
+        questions.add(new Question(counter.incrementAndGet(), "Dies könnte zu deinem einzigen Leben werden, willst du das wirklich?"));
+    }
+
+    @GetMapping("/question")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public Question question(@RequestParam(value = "question", defaultValue = "Wie gehts dir") String question) {
+        return new Question(1, String.format(template, question));
     }
 
     @GetMapping("/getAllQuestion")
-    @CrossOrigin(origins = "http://localhost:3000")    public ArrayList<Question> questions() {
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ArrayList<Question> questions() {
         return questions;
     }
 
@@ -60,5 +68,4 @@ public class QuestionController {
         sum *= 100;
         return new Answer(1, Double.toString(sum));
     }
-
 }
