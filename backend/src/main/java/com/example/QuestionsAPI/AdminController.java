@@ -6,9 +6,8 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class AdminController {
+    private Repository repo = Repository.getInstance();
 
-    private int pageVisited = 0;
-    
     @PostMapping("/sendErgebis")
     @CrossOrigin(origins = "http://localhost:3000")
     public String addTopic(@RequestBody TestErgebnis test){
@@ -18,13 +17,12 @@ public class AdminController {
     @PostMapping("/addVisit")
     @CrossOrigin(origins = "http://localhost:3000")
     public String addSiteVisit(@RequestBody AddUser add){
-        pageVisited+=add.getAdd();
-        return "Ok";
+        return repo.addVisitor(add);
     }
 
     @GetMapping("/getAmountVisited")
     @CrossOrigin(origins = "http://localhost:3000")
     public int getAmountVisited(){
-        return pageVisited;
+        return repo.getVisitors();
     }
 }

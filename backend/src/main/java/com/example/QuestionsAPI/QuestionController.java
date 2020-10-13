@@ -21,54 +21,29 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class QuestionController {
-
-    private static final String template = "%s?";
-    ArrayList<Question> questions = new ArrayList<>();
-
-    public QuestionController() {
-        AtomicLong counter = new AtomicLong();
-        questions.add(new Question(counter.incrementAndGet(), "Hast du spass mit Computer zu arbeiten ?"));
-        questions.add(new Question(counter.incrementAndGet(), "Wie läuft es so mit Mathe ?"));
-        questions.add(new Question(counter.incrementAndGet(), "Willst du deine Freizeit Opfern ?"));
-        questions.add(new Question(counter.incrementAndGet(), "Könntest du dir vorstellen in ein Gebiet einzutauchen welches sich Konstant verändert?"));
-        questions.add(new Question(counter.incrementAndGet(), "Würdest du dich eher als eine Person beschrieben welche Lieber seine Arbeit ohne grosse Aktivität durchführt beschrieben?"));
-        questions.add(new Question(counter.incrementAndGet(), "Dies könnte zu deinem einzigen Leben werden, willst du das wirklich?"));
-    }
+    private Repository repo = Repository.getInstance();
 
     @GetMapping("/question")
     @CrossOrigin(origins = "http://localhost:3000")
     public Question question(@RequestParam(value = "question", defaultValue = "Wie gehts dir") String question) {
-        return new Question(1, String.format(template, question));
+        return new Question(1, question);
     }
 
     @GetMapping("/getAllQuestion")
     @CrossOrigin(origins = "http://localhost:3000")
     public ArrayList<Question> questions() {
-        return questions;
+        return repo.getQuestions();
     }
 
     @GetMapping("/getQuestionID")
     @CrossOrigin(origins = "http://localhost:3000")
     public Question getQuestionId(@RequestParam(value = "id", defaultValue = "1") String id) {
-        int idQue = Integer.parseInt(id);
-        for (Question q : questions) {
-            if (idQue == q.getId()) {
-                return q;
-            }
-        }
-        return new Question(404, "Question not Found");
+        return repo.getQuestionId(id);
     }
 
     @GetMapping("/calculateRate")
     @CrossOrigin(origins = "http://localhost:3000")
     public Answer getCalculation(@RequestParam(value = "answers", defaultValue = "0") String answer) {
-        double sum = 0;
-        for (int i = 0; i < answer.length(); i++) {
-            int a = Integer.parseInt(String.valueOf(answer.charAt(i)));
-            sum += a;
-        }
-        sum /= questions.size() * 4;
-        sum *= 100;
-        return new Answer(1, Double.toString(sum));
+        return repo.calculateAnswer(answer);
     }
 }
