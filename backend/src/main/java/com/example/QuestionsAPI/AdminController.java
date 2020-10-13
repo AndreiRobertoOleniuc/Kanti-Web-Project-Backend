@@ -8,13 +8,14 @@ import org.springframework.web.bind.annotation.*;
 public class AdminController {
 
     private int pageVisited = 0;
-    @RequestMapping(method = RequestMethod.POST, value="/sendErgebis")
+    
+    @PostMapping("/sendErgebis")
     @CrossOrigin(origins = "http://localhost:3000")
     public String addTopic(@RequestBody TestErgebnis test){
         return "Ok";
     }
 
-    @RequestMapping(method = RequestMethod.POST, value="/addVisit")
+    @PostMapping("/addVisit")
     @CrossOrigin(origins = "http://localhost:3000")
     public String addSiteVisit(@RequestBody AddUser add){
         pageVisited+=add.getAdd();
