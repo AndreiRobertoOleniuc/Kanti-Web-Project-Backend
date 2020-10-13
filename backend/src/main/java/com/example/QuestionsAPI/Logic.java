@@ -3,18 +3,18 @@ package com.example.QuestionsAPI;
 import com.example.Models.AddUser;
 import com.example.Models.Answer;
 import com.example.Models.Question;
-
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
-public class Repository {
+public class Logic {
 
-    private static Repository instance = null;
+    private static Logic instance = null;
     private static final String template = "%s?";
     ArrayList<Question> questions = new ArrayList<>();
     private int pageVisited = 0;
 
-    private Repository() {
+    private Logic() {
         AtomicLong counter = new AtomicLong();
         questions.add(new Question(counter.incrementAndGet(), "Hast du spass mit Computer zu arbeiten ?"));
         questions.add(new Question(counter.incrementAndGet(), "Wie läuft es so mit Mathe ?"));
@@ -24,9 +24,9 @@ public class Repository {
         questions.add(new Question(counter.incrementAndGet(), "Dies könnte zu deinem einzigen Leben werden, willst du das wirklich?"));
     }
 
-    public static Repository getInstance() {
+    public static Logic getInstance() {
         if (instance == null) {
-            instance = new Repository();
+            instance = new Logic();
         }
         return instance;
     }
@@ -67,4 +67,5 @@ public class Repository {
     public int getVisitors(){
         return pageVisited;
     }
+
 }

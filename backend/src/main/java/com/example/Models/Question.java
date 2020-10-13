@@ -5,15 +5,25 @@
  */
 package com.example.Models;
 
+import org.springframework.lang.NonNull;
+
+import javax.persistence.*;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
 /**
  *
  * @author Andrei Oleniuc
  */
 public class Question {
 
-    private final long id;
-    private final String question;
+    private long id;
 
+    private String question;
+
+    public Question(){
+
+    }
     public Question(long id, String question) {
         this.id = id;
         this.question = question;
@@ -27,4 +37,11 @@ public class Question {
         return question;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
+    }
 }

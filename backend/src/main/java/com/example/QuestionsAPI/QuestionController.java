@@ -6,7 +6,6 @@
 package com.example.QuestionsAPI;
 
 import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicLong;
 
 import com.example.Models.Answer;
 import com.example.Models.Question;
@@ -21,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class QuestionController {
-    private Repository repo = Repository.getInstance();
+    private Logic logic = Logic.getInstance();
 
     @GetMapping("/question")
     @CrossOrigin(origins = "http://localhost:3000")
@@ -32,18 +31,18 @@ public class QuestionController {
     @GetMapping("/getAllQuestion")
     @CrossOrigin(origins = "http://localhost:3000")
     public ArrayList<Question> questions() {
-        return repo.getQuestions();
+        return logic.getQuestions();
     }
 
     @GetMapping("/getQuestionID")
     @CrossOrigin(origins = "http://localhost:3000")
     public Question getQuestionId(@RequestParam(value = "id", defaultValue = "1") String id) {
-        return repo.getQuestionId(id);
+        return logic.getQuestionId(id);
     }
 
     @GetMapping("/calculateRate")
     @CrossOrigin(origins = "http://localhost:3000")
     public Answer getCalculation(@RequestParam(value = "answers", defaultValue = "0") String answer) {
-        return repo.calculateAnswer(answer);
+        return logic.calculateAnswer(answer);
     }
 }

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class AdminController {
-    private Repository repo = Repository.getInstance();
+    private Logic repo = Logic.getInstance();
 
     @PostMapping("/sendErgebis")
     @CrossOrigin(origins = "http://localhost:3000")
