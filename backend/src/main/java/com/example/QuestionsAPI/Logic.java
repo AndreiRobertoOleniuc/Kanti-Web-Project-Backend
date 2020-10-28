@@ -16,12 +16,12 @@ public class Logic {
 
     private Logic() {
         AtomicLong counter = new AtomicLong();
-        questions.add(new Question(counter.incrementAndGet(), "Hast du spass mit Computer zu arbeiten ?"));
-        questions.add(new Question(counter.incrementAndGet(), "Wie läuft es so mit Mathe ?"));
-        questions.add(new Question(counter.incrementAndGet(), "Willst du deine Freizeit Opfern ?"));
-        questions.add(new Question(counter.incrementAndGet(), "Könntest du dir vorstellen in ein Gebiet einzutauchen welches sich Konstant verändert?"));
-        questions.add(new Question(counter.incrementAndGet(), "Würdest du dich eher als eine Person beschrieben welche Lieber seine Arbeit ohne grosse Aktivität durchführt beschrieben?"));
-        questions.add(new Question(counter.incrementAndGet(), "Dies könnte zu deinem einzigen Leben werden, willst du das wirklich?"));
+        questions.add(new Question(counter.incrementAndGet(), "Example Question 1"));
+        questions.add(new Question(counter.incrementAndGet(), "Example Question 2"));
+        questions.add(new Question(counter.incrementAndGet(), "Example Question 3"));
+        questions.add(new Question(counter.incrementAndGet(), "Example Question 4"));
+        questions.add(new Question(counter.incrementAndGet(), "Example Question 5"));
+        questions.add(new Question(counter.incrementAndGet(), "Example Question 6"));
     }
 
     public static Logic getInstance() {
